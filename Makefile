@@ -25,14 +25,12 @@ MAKE_PATH:=src
 define Package/gdut-drcom
   SECTION:=utils
   CATEGORY:=Utilities
-  SUBMENU:=Compression
-  TITLE:=gdut-drcom (GNU zip) is a compression utility.
+  TITLE:=gdut-drcom for openwrt is a third party drcom client openwrt.
   MAINTAINER:=chw
 endef
 
 define Package/gdut-drcom/description
-	gdut-drcom(GNU zip) is a compression utility designed to be a \
-	replacement for compress.
+	gdut-drcom for openwrt is a third party drcom client openwrt.
 endef
 
 define Package/gdut-drcom/postinst
