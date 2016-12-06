@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=gdut-drcom
-PKG_VERSION:=1.6.1
+PKG_VERSION:=1.6.4
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
-PKG_SOURCE_URL:=https://github.com/chenhaowen01/gdut-drcom/raw/master/release
-PKG_MD5SUM:=4c0cc49f2deadb8e90d948ca9420634a
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
+PKG_SOURCE:=$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://github.com/chenhaowen01/$(PKG_NAME)/archive
+PKG_MD5SUM:=fb9df0f6fa31190bbeb501cdb43ff26e
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_LICENSE:=GPL-3.0+
 
 #PKG_INSTALL:=1
