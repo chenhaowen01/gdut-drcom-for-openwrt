@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=gdut-drcom
-PKG_VERSION:=1.6.5
+PKG_VERSION:=1.6.7
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/chenhaowen01/$(PKG_NAME)/archive
-PKG_MD5SUM:=604bf1daf50ab22c2f0bdbe0d70ebfe3
+PKG_MD5SUM:=119970a1e5e12aa7519145fa4df32eda
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_LICENSE:=GPL-3.0+
 
