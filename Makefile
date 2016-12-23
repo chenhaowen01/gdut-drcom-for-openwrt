@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=gdut-drcom
-PKG_VERSION:=1.6.7
+PKG_VERSION:=1.6.8
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/chenhaowen01/$(PKG_NAME)/archive
-PKG_MD5SUM:=119970a1e5e12aa7519145fa4df32eda
+PKG_MD5SUM:=86586eacd0540c994c0f194197d6000e
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_LICENSE:=GPL-3.0+
 
@@ -23,9 +23,9 @@ include $(INCLUDE_DIR)/package.mk
 MAKE_PATH:=src
 
 define Package/gdut-drcom
-  SECTION:=utils
-  CATEGORY:=Utilities
-  TITLE:=gdut-drcom for openwrt is a third party drcom client openwrt.
+  SECTION:=net
+  CATEGORY:=Network
+  TITLE:=A third party drcom client openwrt.
   MAINTAINER:=chw
 endef
 

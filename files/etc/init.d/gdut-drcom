@@ -49,7 +49,7 @@ start() {
 	if [ "$enable_crypt"x = "1"x ]; then
         cmd=$cmd"--enable-crypt "
     fi
-	cmd=$cmd"1> /tmp/gdut-drcom.log 2>/tmp/gdut-drcom_error.log &"
+	cmd=$cmd"--log-file=/tmp/gdut-drcom.log 2>/tmp/gdut-drcom_error.log &"
 
 	eval $cmd
 }
