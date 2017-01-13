@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "pre remove: unpatching ppp.sh!"
+sed -i '/#added by gdut-drcom/d' /lib/netifd/proto/ppp.sh
+echo "unpatched!"

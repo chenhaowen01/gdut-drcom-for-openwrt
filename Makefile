@@ -51,6 +51,8 @@ endef
 define Package/gdut-drcom/install
 	$(INSTALL_DIR)  $(1)/usr/bin
 	$(INSTALL_BIN)  $(PKG_BUILD_DIR)/src/gdut-drcom $(1)/usr/bin
+	$(INSTALL_BIN)  ./files/usr/bin/gdut-drcom-patch $(1)/usr/bin
+	$(INSTALL_BIN)  ./files/usr/bin/gdut-drcom-unpatch $(1)/usr/bin
 	$(INSTALL_DIR)  $(1)/etc
 	$(INSTALL_DATA) ./files/etc/gdut-drcom.conf $(1)/etc
 	$(INSTALL_DIR)  $(1)/etc/init.d
