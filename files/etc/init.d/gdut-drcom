@@ -34,7 +34,7 @@ start() {
 #	fi
 
 	if [ -n "$macaddr" ]; then
-		uci set network.wan.macaddr="$macaddr"
+		uci set network.wan_dev.macaddr="$macaddr"
 		uci commit
 #		/etc/init.d/network restart
 	fi
