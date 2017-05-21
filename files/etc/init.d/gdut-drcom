@@ -7,10 +7,10 @@ start() {
 	keep_alive1_flag=$(uci get gdut_drcom.@gdut_drcom[0].keep_alive1_flag 2>/dev/null)
 	enable=$(uci get gdut_drcom.@gdut_drcom[0].enable 2>/dev/null)
 
-#	enable_dial=$(uci get gdut_drcom.@gdut_drcom[0].enable_dial 2>/dev/null)
-#	ifname=$(uci get gdut_drcom.@gdut_drcom[0].ifname 2>/dev/null)
-#	username=$(uci get gdut_drcom.@gdut_drcom[0].username 2>/dev/null)
-#	password=$(uci get gdut_drcom.@gdut_drcom[0].password 2>/dev/null)
+	enable_dial=$(uci get gdut_drcom.@gdut_drcom[0].enable_dial 2>/dev/null)
+	ifname=$(uci get gdut_drcom.@gdut_drcom[0].ifname 2>/dev/null)
+	username=$(uci get gdut_drcom.@gdut_drcom[0].username 2>/dev/null)
+	password=$(uci get gdut_drcom.@gdut_drcom[0].password 2>/dev/null)
 	macaddr=$(uci get gdut_drcom.@gdut_drcom[0].macaddr 2>/dev/null)
 	enable_crypt=$(uci get gdut_drcom.@gdut_drcom[0].enable_crypt 2>/dev/null)
 	
@@ -22,21 +22,25 @@ start() {
 		return
 	fi
 
-#	if [ "$enable_dial"x = "1"x ]; then
-#		uci set network.wan.ifname="$ifname"
-#		uci set network.wan.proto="pppoe"
-#		uci set network.wan.username="$username"
-#		uci set network.wan.password="$password"
+	if [ "$enable_dial"x != "0"x ]; then
+#		echo "$ifname" "$username" "$password"
+		/usr/bin/gdut-drcom-patch
+		uci set network.wan.ifname="$ifname"
+		uci set network.wan.proto="pppoe"
+		uci set network.wan.username="$username"
+		uci set network.wan.password="$password"
 #		uci set network.wan._orig_ifname='eth0.2'
 #		uci set network.wan._orig_bridge='false'
-#		uci commit
-#		/etc/init.d/network restart
-#	fi
+		uci commit
+	fi
 
 	if [ -n "$macaddr" ]; then
 		uci set network.wan_dev.macaddr="$macaddr"
 		uci commit
-#		/etc/init.d/network restart
+	fi
+
+	if [ -n "$macaddr" -o "$enable_dial"x != "0"x ]; then
+		/etc/init.d/network restart
 	fi
 
 	cmd="service_start /usr/bin/gdut-drcom -c /etc/gdut-drcom.conf "

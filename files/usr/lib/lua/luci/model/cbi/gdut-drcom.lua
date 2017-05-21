@@ -12,7 +12,7 @@ http://www.apache.org/licenses/LICENSE-2.0
 
 require("luci.sys")
 
-m = Map("gdut_drcom", translate("gdut-drcom Client"), translate("Configure gdut-drcom client."))
+m = Map("gdut_drcom", translate("gdut-drcom Client"), translate("Configure gdut-drcom client. Configure gdut-drcom client. Visit the project home: https://github.com/chenhaowen01/gdut-drcom-for-openwrt for help!"))
 
 s = m:section(TypedSection, "gdut_drcom", "")
 s.addremove = false
@@ -20,7 +20,7 @@ s.anonymous = true
 
 enable = s:option(Flag, "enable", translate("Enable"))
 
---[[enabledial = s:option(Flag, "enabledial", translate("Enable PPPoE Dial"))
+enabledial = s:option(Flag, "enabledial", translate("Enable PPPoE Dial"))
 enabledial.default = enabledial.enabled
 
 ifname = s:option(ListValue, "ifname", translate("Interface name"))
@@ -36,7 +36,7 @@ username:depends("enabledial", "1")
 password = s:option(Value, "password", translate("Password"))
 password:depends("enabledial", "1")
 password.password = true
-]]--
+
 macaddr = s:option(Value, "macaddr", translate("Mac address"))
 macaddr.datatype="macaddr"
 remote_ip = s:option(Value, "remote_ip", translate("Remote ip"))
