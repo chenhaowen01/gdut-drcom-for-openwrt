@@ -43,22 +43,24 @@ start() {
 		/etc/init.d/network restart
 	fi
 
-	cmd="service_start /usr/bin/gdut-drcom -c /etc/gdut-drcom.conf "
 	if [ -n "$remote_ip" ]; then
-		cmd=$cmd"--remote-ip=$remote_ip "
+		config_remote_ip="--remote-ip=$remote_ip"
 	fi
 	if [ -n "$keep_alive1_flag" ]; then
-		cmd=$cmd"--keep-alive1-flag=$keep_alive1_flag "
+		config_keep_alive1_flag="--keep-alive1-flag=$keep_alive1_flag"
 	fi
 	if [ "$enable_crypt"x = "1"x ]; then
-        cmd=$cmd"--enable-crypt "
-    fi
-	cmd=$cmd"--log-file=/tmp/gdut-drcom.log 2>/tmp/gdut-drcom_error.log &"
+		config_enable_crypt="--enable-crypt"
+	fi
 
-	eval $cmd
+	gdut-drcom -c /etc/gdut-drcom.conf \
+		$config_remote_ip $config_keep_alive1_flag $config_enable_crypt \
+		--log-file=/tmp/gdut-drcom.log 2>/tmp/gdut-drcom_error.log & 
 }
 stop()
 {
-	service_stop /usr/bin/gdut-drcom
+	if [ -n "$(pidof aria2c)" ]; then
+		killall gdut-drcom
+	fi
 	return 0
 }
