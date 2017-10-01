@@ -31,6 +31,12 @@ for k, v in ipairs(luci.sys.net.devices()) do
 	end
 end
 
+x = luci.model.uci.cursor()
+currentifname = x:get("network", "wan", "ifname")
+if currentifname ~= nil and string.sub(currentifname,0,3) == "eth" then
+	ifname.default = currentifname
+end
+
 username = s:option(Value, "username", translate("Username"))
 username:depends("enabledial", "1")
 password = s:option(Value, "password", translate("Password"))
