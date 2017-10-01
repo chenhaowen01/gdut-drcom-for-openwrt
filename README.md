@@ -12,7 +12,7 @@
 ```bash
 tar xvjf OpenWrt-SDK-15.05-ramips-rt305x_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2
 cd OpenWrt-SDK-15.05-ramips-rt305x_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64
-git clone https://github.com/chenhaowen01/gdut-drcom.git package/gdut-drcom
+git clone https://github.com/chenhaowen01/gdut-drcom-for-openwrt.git package/gdut-drcom
 make package/gdut-drcom/compile
 ```
 
