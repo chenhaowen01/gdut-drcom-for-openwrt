@@ -36,6 +36,7 @@ start() {
 
 	if [ -n "$macaddr" ]; then
 		uci set network.wan_dev.macaddr="$macaddr"
+		uci set network.wan.macaddr="$macaddr"
 		uci commit
 	fi
 
