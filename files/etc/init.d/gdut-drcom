@@ -1,8 +1,12 @@
 #!/bin/sh /etc/rc.common
-#(c) 2010 ivan_wl
+
 START=99
 
-start() {
+USE_PROCD=1
+
+COMMAND="/usr/bin/gdut-drcom"
+
+start_service() {
 	remote_ip=$(uci get gdut_drcom.@gdut_drcom[0].remote_ip 2>/dev/null)
 	keep_alive1_flag=$(uci get gdut_drcom.@gdut_drcom[0].keep_alive1_flag 2>/dev/null)
 	enable=$(uci get gdut_drcom.@gdut_drcom[0].enable 2>/dev/null)
@@ -41,7 +45,7 @@ start() {
 	fi
 
 	if [ -n "$macaddr" -o "$enable_dial"x != "0"x ]; then
-		/etc/init.d/network restart
+		/etc/init.d/network reload
 	fi
 
 	if [ -n "$remote_ip" ]; then
@@ -54,14 +58,13 @@ start() {
 		config_enable_crypt="--enable-crypt"
 	fi
 
-	gdut-drcom -c /etc/gdut-drcom.conf \
+	procd_open_instance
+
+	procd_set_param respawn
+	procd_set_param command $COMMAND -c /etc/gdut-drcom.conf \
 		$config_remote_ip $config_keep_alive1_flag $config_enable_crypt \
-		--log-file=/tmp/gdut-drcom.log 2>/tmp/gdut-drcom_error.log & 
-}
-stop()
-{
-	if [ -n "$(pidof aria2c)" ]; then
-		killall gdut-drcom
-	fi
-	return 0
+		--log-file=/tmp/gdut-drcom.log 2>/tmp/gdut-drcom_error.log
+
+	procd_close_instance
+
 }
