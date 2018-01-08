@@ -23,18 +23,20 @@ enable = s:option(Flag, "enable", translate("Enable"))
 enabledial = s:option(Flag, "enabledial", translate("Enable PPPoE Dial"))
 enabledial.default = enabledial.enabled
 
-ifname = s:option(ListValue, "ifname", translate("Interface name"))
-ifname:depends("enabledial", "1")
-for k, v in ipairs(luci.sys.net.devices()) do
-	if string.sub(v,0,3) == "eth" then
-		ifname:value(v)
-	end
-end
+interface = s:option(ListValue, "interface", translate("Interface"), translate("Please select your dial interface. (Generally it's named WAN/wan.)"))
+interface:depends("enabledial", "1")
 
-x = luci.model.uci.cursor()
-currentifname = x:get("network", "wan", "ifname")
-if currentifname ~= nil and string.sub(currentifname,0,3) == "eth" then
-	ifname.default = currentifname
+cur = luci.model.uci.cursor()
+net = cur:get_all("network")
+for k, v in pairs(net) do
+	for k1, v1 in pairs(v) do
+		if v1 == "interface" then
+			interface:value(k)
+			if k == "WAN" or k == "wan" then
+				interface.default = k
+			end
+		end
+	end
 end
 
 username = s:option(Value, "username", translate("Username"))
