@@ -37,6 +37,8 @@ start_service() {
 #               uci set network.${interface}._orig_ifname='eth0.2'
 #               uci set network.${interface}._orig_bridge='false'
                 uci commit
+	else
+		/usr/bin/gdut-drcom-unpatch
         fi
 
 	if [ -n "$macaddr" ]; then
